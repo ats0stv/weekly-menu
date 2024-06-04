@@ -19,6 +19,14 @@ def get_next_day():
     today = datetime.now()
     return today + timedelta(days=1)
 
+# Function to read WordPress credentials from a file
+def read_wp_credentials(file_name):
+    with open(file_name, 'r') as file:
+        lines = file.readlines()
+        username = lines[0].strip().split(': ')[1]
+        password = lines[1].strip().split(': ')[1]
+    return username, password
+
 # Read CSV files into dataframes
 main_items_df = read_csv('main_items.csv')
 side_items_df = read_csv('side_items.csv')
@@ -86,10 +94,11 @@ parser.add_argument('--update_wp', action='store_true', help="Update the WordPre
 args = parser.parse_args()
 
 if args.update_wp:
+    # Read WordPress credentials
+    wp_user, wp_password = read_wp_credentials('wp_config.txt')
+
     # WordPress REST API Credentials and URL
     wp_url = "https://thundyill.com/wp-json/wp/v2/pages/899"
-    wp_user = "bot_user"
-    wp_password = 'Best Password Here'
 
     # Update WordPress Page
     data = {
