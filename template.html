@@ -28,15 +28,17 @@
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
-                    <th>Day</th>
-                    <th>Menu Item</th>
+                    <th>Date (Day)</th>
+                    <th>Breakfast</th>
+                    <th>Dinner</th>
                 </tr>
             </thead>
             <tbody>
-                {% for day, item in menu %}
+                {% for day, breakfast, dinner in menu %}
                 <tr>
                     <td class="day-header">{{ day }}</td>
-                    <td>{{ item }}</td>
+                    <td>{{ breakfast }}</td>
+                    <td>{{ dinner }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
